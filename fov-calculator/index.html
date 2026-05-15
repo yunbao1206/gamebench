@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOV Calculator - Calculate Field of View for Gaming | GameBench</title>
+  <meta name="description" content="Free FOV calculator for gaming. Calculate horizontal and vertical field of view based on your monitor size and viewing distance. Find your optimal in-game FOV setting.">
+  <meta name="keywords" content="FOV calculator, field of view calculator, gaming FOV, monitor FOV, viewing distance FOV, in-game FOV">
+  <link rel="canonical" href="https://game.wiseclick.site/fov-calculator/">
+  <meta property="og:title" content="FOV Calculator - Calculate Field of View for Gaming | GameBench">
+  <meta property="og:description" content="Calculate your optimal field of view based on monitor size, viewing distance, and aspect ratio.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "FOV Calculator",
+    "description": "Calculate field of view for gaming based on monitor and seating distance",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What FOV should I use for gaming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The ideal FOV depends on your monitor size and how far you sit from the screen. A natural FOV of 80-100 degrees is comfortable for most setups. For competitive FPS games, many players prefer 90-110 degrees for a wider view. Use this calculator to find your physically correct FOV."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a higher FOV reduce FPS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, a higher FOV means the game engine renders more of the scene, which can slightly reduce FPS. The impact is usually small (2-5%) but can be larger in open-world games. Competitive players often accept this trade-off for better spatial awareness."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a wrong FOV cause motion sickness?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your in-game FOV does not match the actual angular size of your monitor from your viewing position, your eyes and inner ear send conflicting signals. A FOV that is too low creates a tunnel-vision effect, while a FOV that is too high creates a fish-eye distortion. Both can cause motion sickness."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://game.wiseclick.site/" },
+      { "@type": "ListItem", "position": 2, "name": "FOV Calculator", "item": "https://game.wiseclick.site/fov-calculator/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        GameBench
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb">
+      <a href="/">Home</a> / <span>FOV Calculator</span>
+    </nav>
+
+    <div class="calc-page">
+      <h1>FOV Calculator</h1>
+      <p class="subtitle">Calculate the optimal field of view for your monitor and viewing distance.</p>
+
+      <div class="calc-tool">
+        <form class="calc-form" id="fov-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="monitor-width">Monitor Width (cm)</label>
+            <input type="number" id="monitor-width" value="60" min="10" step="1">
+          </div>
+          <div class="form-group">
+            <label for="viewing-distance">Viewing Distance (cm)</label>
+            <input type="number" id="viewing-distance" value="70" min="10" step="1">
+          </div>
+          <div class="form-group">
+            <label for="aspect-ratio">Aspect Ratio</label>
+            <select id="aspect-ratio">
+              <option value="16:9" selected>16:9</option>
+              <option value="16:10">16:10</option>
+              <option value="21:9">21:9</option>
+              <option value="32:9">32:9</option>
+            </select>
+          </div>
+          <button type="button" class="btn-calculate" onclick="calculateFOV()">Calculate FOV</button>
+        </form>
+
+        <div class="calc-results" id="results">
+          <div class="result-highlight">
+            <div class="label">Horizontal FOV</div>
+            <div class="value" id="h-fov">0</div>
+          </div>
+          <div class="result-details">
+            <div class="result-item">
+              <div class="label">Vertical FOV</div>
+              <div class="value" id="v-fov">0</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Recommended In-Game FOV</div>
+              <div class="value" id="recommended-fov">0</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Classification</div>
+              <div class="value" id="fov-classification">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="cta-section">
+          <div class="cta-card">
+            <div class="cta-icon">🎮</div>
+            <h3>Optimize Your Gaming Experience</h3>
+            <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+            <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+            <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="seo-content">
+        <div class="seo-block">
+          <h2>What Is Field of View (FOV)?</h2>
+          <p>Field of view (FOV) is the extent of the observable world seen at any given moment. In gaming, FOV determines how much of the game world is visible on screen. It is measured in degrees and calculated based on your monitor's physical width and how far you sit from it.</p>
+          <p>The formula is: <strong>FOV = 2 x atan(monitor width / (2 x viewing distance)) x (180 / PI)</strong></p>
+          <p>Setting your in-game FOV to match your physical FOV creates the most natural and immersive experience, reducing motion sickness and eye strain.</p>
+        </div>
+        <div class="seo-block">
+          <h2>FOV Classifications</h2>
+          <ul>
+            <li><strong>Too Narrow (below 60 degrees)</strong> — Tunnel vision effect. You miss peripheral information. Common when sitting too far from a small monitor.</li>
+            <li><strong>Narrow (60-80 degrees)</strong> — Limited peripheral vision. Acceptable for casual gaming but not ideal for competitive play.</li>
+            <li><strong>Natural (80-100 degrees)</strong> — Comfortable and immersive. Matches natural human peripheral focus for most desk setups.</li>
+            <li><strong>Wide (100-120 degrees)</strong> — Extended peripheral vision. Great for competitive FPS games where awareness matters.</li>
+            <li><strong>Ultra-wide (above 120 degrees)</strong> — Very wide view, typical of ultra-wide monitors at close distance. Can cause fish-eye distortion in some games.</li>
+          </ul>
+        </div>
+        <div class="seo-block full-width">
+          <h2>Frequently Asked Questions</h2>
+          <h3>What FOV should I use for gaming?</h3>
+          <p>The ideal FOV depends on your monitor size and how far you sit from the screen. A natural FOV of 80-100 degrees is comfortable for most setups. For competitive FPS games, many players prefer 90-110 degrees for a wider view. Use this calculator to find your physically correct FOV.</p>
+          <h3>Does a higher FOV reduce FPS?</h3>
+          <p>Yes, a higher FOV means the game engine renders more of the scene, which can slightly reduce FPS. The impact is usually small (2-5%) but can be larger in open-world games. Competitive players often accept this trade-off for better spatial awareness.</p>
+          <h3>Why does a wrong FOV cause motion sickness?</h3>
+          <p>If your in-game FOV does not match the actual angular size of your monitor from your viewing position, your eyes and inner ear send conflicting signals. A FOV that is too low creates a tunnel-vision effect, while a FOV that is too high creates a fish-eye distortion. Both can cause motion sickness.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block full-width" style="background:var(--bg-secondary);border-style:dashed;margin-top:1rem">
+      <h2>Disclaimer</h2>
+      <p>This FOV calculator is for <strong>educational and estimation purposes only</strong>. The calculated FOV is based on geometric optics and does not account for in-game FOV scaling methods, which vary by game engine. Some games use horizontal FOV, others use vertical FOV, and scaling may differ.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+      </ul>
+      <div class="cross-site-links"><span>More WiseClick Tools:</span><a href="https://calc.wiseclick.site/" target="_blank" rel="noopener">Finance</a><a href="https://insure.wiseclick.site/" target="_blank" rel="noopener">Insurance</a><a href="https://fit.wiseclick.site/" target="_blank" rel="noopener">Health</a></div>
+      <p class="footer-copy">&copy; 2026 GameBench by WiseClick. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  function calculateFOV() {
+    const monitorWidth = parseFloat(document.getElementById('monitor-width').value) || 0;
+    const viewingDist = parseFloat(document.getElementById('viewing-distance').value) || 0;
+    const aspectStr = document.getElementById('aspect-ratio').value;
+
+    if (monitorWidth <= 0 || viewingDist <= 0) {
+      document.getElementById('results').classList.remove('visible');
+      return;
+    }
+
+    // Parse aspect ratio
+    const parts = aspectStr.split(':');
+    const arW = parseFloat(parts[0]);
+    const arH = parseFloat(parts[1]);
+
+    // Horizontal FOV
+    const hFOV = 2 * Math.atan(monitorWidth / (2 * viewingDist)) * (180 / Math.PI);
+
+    // Vertical FOV based on aspect ratio
+    // monitor height = monitor width * (arH / arW)
+    const monitorHeight = monitorWidth * (arH / arW);
+    const vFOV = 2 * Math.atan(monitorHeight / (2 * viewingDist)) * (180 / Math.PI);
+
+    // Classification
+    let classification;
+    if (hFOV < 60) classification = 'Too Narrow';
+    else if (hFOV < 80) classification = 'Narrow';
+    else if (hFOV <= 100) classification = 'Natural';
+    else if (hFOV <= 120) classification = 'Wide';
+    else classification = 'Ultra-wide';
+
+    // Recommended in-game FOV (round to nearest 5)
+    const recommendedFOV = Math.round(hFOV / 5) * 5;
+
+    document.getElementById('h-fov').textContent = hFOV.toFixed(1) + '\u00B0';
+    document.getElementById('v-fov').textContent = vFOV.toFixed(1) + '\u00B0';
+    document.getElementById('recommended-fov').textContent = recommendedFOV + '\u00B0';
+    document.getElementById('fov-classification').textContent = classification;
+    document.getElementById('results').classList.add('visible');
+  }
+
+  calculateFOV();
+  </script>
+</body>
+</html>
