@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitor Distance Calculator - Find Ideal Viewing Distance | GameBench</title>
+  <meta name="description" content="Free monitor distance calculator. Find the ideal viewing distance for your monitor size and resolution. Get PPI, pixel density ratings, and recommended seating distance.">
+  <meta name="keywords" content="monitor distance calculator, ideal viewing distance, monitor PPI calculator, pixel density, screen distance, monitor size calculator">
+  <link rel="canonical" href="https://game.wiseclick.site/monitor-distance-calculator/">
+  <meta property="og:title" content="Monitor Distance Calculator - Find Ideal Viewing Distance | GameBench">
+  <meta property="og:description" content="Find the ideal viewing distance for your monitor based on size, resolution, and usage.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Monitor Distance Calculator",
+    "description": "Find the ideal viewing distance for your monitor size and resolution",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How far should I sit from my monitor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For gaming, sit about 1.5x the monitor height away. For general use, about 2x the monitor height. For design work, closer at about 1x the monitor height. A 27-inch monitor at 1440p is typically best viewed at 50-70 cm."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does resolution affect ideal viewing distance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Higher resolution (higher PPI) means you can sit closer without seeing individual pixels. A 4K monitor at 27 inches has 163 PPI, allowing you to sit very close. A 1080p monitor at 27 inches has only 82 PPI, so you need to sit further to avoid seeing pixels."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is PPI and why does it matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PPI (pixels per inch) measures pixel density. Higher PPI means sharper text and finer detail. Below 80 PPI, individual pixels become visible at normal viewing distances. 80-110 PPI is good for general use. Above 110 PPI provides sharp detail. Above 140 PPI is considered retina quality."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://game.wiseclick.site/" },
+      { "@type": "ListItem", "position": 2, "name": "Monitor Distance Calculator", "item": "https://game.wiseclick.site/monitor-distance-calculator/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        GameBench
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb">
+      <a href="/">Home</a> / <span>Monitor Distance Calculator</span>
+    </nav>
+
+    <div class="calc-page">
+      <h1>Monitor Distance Calculator</h1>
+      <p class="subtitle">Find the ideal viewing distance for your monitor based on size, resolution, and usage.</p>
+
+      <div class="calc-tool">
+        <form class="calc-form" id="mon-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="monitor-size">Monitor Size</label>
+            <select id="monitor-size">
+              <option value='{"diag":24,"ar":"16:9"}'>24"</option>
+              <option value='{"diag":27,"ar":"16:9"}' selected>27"</option>
+              <option value='{"diag":32,"ar":"16:9"}'>32"</option>
+              <option value='{"diag":34,"ar":"21:9"}'>34" UW</option>
+              <option value='{"diag":38,"ar":"21:9"}'>38" UW</option>
+              <option value='{"diag":42,"ar":"16:9"}'>42"</option>
+              <option value='{"diag":48,"ar":"16:9"}'>48"</option>
+              <option value='{"diag":55,"ar":"16:9"}'>55"</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="resolution">Resolution</label>
+            <select id="resolution">
+              <option value='{"w":1920,"h":1080}'>1080p</option>
+              <option value='{"w":2560,"h":1440}' selected>1440p</option>
+              <option value='{"w":3840,"h":2160}'>4K</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="usage">Usage</label>
+            <select id="usage">
+              <option value="1.5" selected>Gaming</option>
+              <option value="2.0">General Use</option>
+              <option value="1.0">Design Work</option>
+            </select>
+          </div>
+          <button type="button" class="btn-calculate" onclick="calculateDistance()">Calculate Distance</button>
+        </form>
+
+        <div class="calc-results" id="results">
+          <div class="result-highlight">
+            <div class="label">Recommended Distance</div>
+            <div class="value" id="recommended-distance">0 cm</div>
+          </div>
+          <div class="result-details">
+            <div class="result-item">
+              <div class="label">Pixel Density (PPI)</div>
+              <div class="value" id="ppi">0</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Pixel Density Rating</div>
+              <div class="value" id="ppi-rating">-</div>
+            </div>
+            <div class="result-item">
+              <div class="label">SMPTE Recommended</div>
+              <div class="value" id="smpte-distance">0 cm</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Minimum Distance (resolve pixels)</div>
+              <div class="value" id="min-distance">0 cm</div>
+            </div>
+          </div>
+        </div>
+        <div class="cta-section">
+          <div class="cta-card">
+            <div class="cta-icon">🎮</div>
+            <h3>Optimize Your Gaming Experience</h3>
+            <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+            <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+            <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="seo-content">
+        <div class="seo-block">
+          <h2>Why Viewing Distance Matters</h2>
+          <p>Sitting at the right distance from your monitor affects both comfort and visual quality. Too close and you'll see individual pixels and strain your eyes. Too far and you lose detail and immersion. The ideal distance depends on three factors: <strong>monitor size</strong>, <strong>resolution</strong>, and <strong>usage type</strong>.</p>
+          <p>Higher resolution monitors (like 4K) pack more pixels into the same screen area, meaning you can sit closer without seeing pixels. Larger monitors require more distance to see the full screen comfortably.</p>
+        </div>
+        <div class="seo-block">
+          <h2>Usage-Based Recommendations</h2>
+          <ul>
+            <li><strong>Gaming (1.5x monitor height)</strong> — Closer for immersion and wider field of view. You want the screen to fill more of your vision for a competitive edge.</li>
+            <li><strong>General Use (2.0x monitor height)</strong> — A balanced distance that reduces eye strain during long sessions. Good for browsing, office work, and mixed use.</li>
+            <li><strong>Design Work (1.0x monitor height)</strong> — Closer to see fine details. Designers need to see individual pixels for precise editing work.</li>
+          </ul>
+          <p>The SMPTE (Society of Motion Picture and Television Engineers) recommends sitting at about 3.2x the picture height for a 30-degree viewing angle, which is a more conservative standard.</p>
+        </div>
+        <div class="seo-block full-width">
+          <h2>Frequently Asked Questions</h2>
+          <h3>How far should I sit from my monitor?</h3>
+          <p>For gaming, sit about 1.5x the monitor height away. For general use, about 2x the monitor height. For design work, closer at about 1x the monitor height. A 27-inch monitor at 1440p is typically best viewed at 50-70 cm.</p>
+          <h3>Does resolution affect ideal viewing distance?</h3>
+          <p>Yes. Higher resolution (higher PPI) means you can sit closer without seeing individual pixels. A 4K monitor at 27 inches has 163 PPI, allowing you to sit very close. A 1080p monitor at 27 inches has only 82 PPI, so you need to sit further to avoid seeing pixels.</p>
+          <h3>What is PPI and why does it matter?</h3>
+          <p>PPI (pixels per inch) measures pixel density. Higher PPI means sharper text and finer detail. Below 80 PPI, individual pixels become visible at normal viewing distances. 80-110 PPI is good for general use. Above 110 PPI provides sharp detail. Above 140 PPI is considered retina quality.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block full-width" style="background:var(--bg-secondary);border-style:dashed;margin-top:1rem">
+      <h2>Disclaimer</h2>
+      <p>This monitor distance calculator is for <strong>educational and estimation purposes only</strong>. Recommended distances are guidelines based on visual acuity standards and may not suit everyone. Personal comfort, eyesight, and workspace constraints should take priority over calculated values.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+      </ul>
+      <div class="cross-site-links"><span>More WiseClick Tools:</span><a href="https://calc.wiseclick.site/" target="_blank" rel="noopener">Finance</a><a href="https://insure.wiseclick.site/" target="_blank" rel="noopener">Insurance</a><a href="https://fit.wiseclick.site/" target="_blank" rel="noopener">Health</a></div>
+      <p class="footer-copy">&copy; 2026 GameBench by WiseClick. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  function calculateDistance() {
+    const monitorData = JSON.parse(document.getElementById('monitor-size').value);
+    const resData = JSON.parse(document.getElementById('resolution').value);
+    const usageMultiplier = parseFloat(document.getElementById('usage').value);
+
+    const diagonal = monitorData.diag;
+    const arStr = monitorData.ar;
+    const arParts = arStr.split(':');
+    const arW = parseFloat(arParts[0]);
+    const arH = parseFloat(arParts[1]);
+
+    // Calculate monitor dimensions from diagonal
+    // diagonal = sqrt(width^2 + height^2) in inches
+    // width/height = arW/arH
+    // height = diagonal / sqrt((arW/arH)^2 + 1)
+    const heightInches = diagonal / Math.sqrt((arW / arH) * (arW / arH) + 1);
+    const widthInches = heightInches * (arW / arH);
+
+    const heightCm = heightInches * 2.54;
+    const widthCm = widthInches * 2.54;
+
+    // PPI
+    const ppi = Math.sqrt(resData.w * resData.w + resData.h * resData.h) / diagonal;
+
+    // PPI rating
+    let ppiRating;
+    if (ppi < 80) ppiRating = 'Low - Pixels visible';
+    else if (ppi < 110) ppiRating = 'Good - Adequate sharpness';
+    else if (ppi < 140) ppiRating = 'Very Good - Sharp detail';
+    else ppiRating = 'Excellent - Retina quality';
+
+    // Recommended distance based on usage
+    const recommendedDist = heightCm * usageMultiplier;
+
+    // SMPTE recommended distance (3.2x height)
+    const smpteDist = heightCm * 3.2;
+
+    // Minimum distance (can resolve individual pixels)
+    // Based on 20/20 vision: minimum distance = pixel_pitch / tan(1/60 degree)
+    // pixel_pitch = 2.54 / PPI cm
+    // tan(1/60 deg) ~ 0.0002909
+    const pixelPitch = 2.54 / ppi;
+    const minDistance = pixelPitch / (2 * Math.tan(Math.PI / (180 * 60 * 2)));
+
+    document.getElementById('recommended-distance').textContent = Math.round(recommendedDist) + ' cm';
+    document.getElementById('ppi').textContent = Math.round(ppi);
+    document.getElementById('ppi-rating').textContent = ppiRating;
+    document.getElementById('smpte-distance').textContent = Math.round(smpteDist) + ' cm';
+    document.getElementById('min-distance').textContent = Math.round(minDistance) + ' cm';
+    document.getElementById('results').classList.add('visible');
+  }
+
+  calculateDistance();
+  </script>
+</body>
+</html>
