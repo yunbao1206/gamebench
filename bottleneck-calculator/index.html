@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bottleneck Calculator - Check CPU &amp; GPU Bottleneck | GameBench</title>
+  <meta name="description" content="Free bottleneck calculator to check if your CPU or GPU is limiting gaming performance. Get upgrade recommendations and estimated FPS.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gamebench.tools/"},
+      {"@type": "ListItem", "position": 2, "name": "Bottleneck Calculator", "item": "https://gamebench.tools/bottleneck-calculator/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a bottleneck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A bottleneck occurs when one component in your PC (usually the CPU or GPU) limits the performance of the others. For example, if you pair a weak CPU with a powerful GPU, the CPU can't feed data fast enough, and the GPU sits idle waiting — that's a CPU bottleneck."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I fix a CPU bottleneck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To fix a CPU bottleneck: upgrade to a faster CPU, increase RAM speed, enable XMP/EXPO in BIOS, close background apps, or lower CPU-intensive settings like draw distance and physics. Playing at higher resolutions can also shift load back to the GPU."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I fix a GPU bottleneck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To fix a GPU bottleneck: upgrade to a more powerful GPU, lower in-game graphics settings, reduce resolution, enable DLSS or FSR upscaling, update GPU drivers, or ensure proper cooling to prevent thermal throttling."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      GameBench
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/" class="active">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <nav class="breadcrumb">
+    <a href="/">Home</a> &rsaquo; <span>Bottleneck Calculator</span>
+  </nav>
+
+  <div class="calc-page">
+    <h1>Bottleneck Calculator</h1>
+    <p class="subtitle">Check if your CPU or GPU is limiting gaming performance and get upgrade recommendations.</p>
+
+    <div class="calc-tool">
+      <div class="calc-form" id="bottleneckForm">
+        <div class="form-group">
+          <label for="cpu">CPU</label>
+          <select id="cpu">
+            <option value="i3-12100F">Intel Core i3-12100F</option>
+            <option value="i5-12400F">Intel Core i5-12400F</option>
+            <option value="i5-13600K">Intel Core i5-13600K</option>
+            <option value="i7-13700K" selected>Intel Core i7-13700K</option>
+            <option value="i7-14700K">Intel Core i7-14700K</option>
+            <option value="i9-13900K">Intel Core i9-13900K</option>
+            <option value="r5-5600x">AMD Ryzen 5 5600X</option>
+            <option value="r7-5800x3d">AMD Ryzen 7 5800X3D</option>
+            <option value="r7-7800x3d">AMD Ryzen 7 7800X3D</option>
+            <option value="r9-7950x">AMD Ryzen 9 7950X</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gpu">GPU</label>
+          <select id="gpu">
+            <option value="rtx3060">RTX 3060</option>
+            <option value="rtx3060ti">RTX 3060 Ti</option>
+            <option value="rtx3070">RTX 3070</option>
+            <option value="rtx3080">RTX 3080</option>
+            <option value="rtx4060">RTX 4060</option>
+            <option value="rtx4060ti">RTX 4060 Ti</option>
+            <option value="rtx4070" selected>RTX 4070</option>
+            <option value="rtx4070s">RTX 4070 Super</option>
+            <option value="rtx4080">RTX 4080</option>
+            <option value="rtx4090">RTX 4090</option>
+            <option value="rx6600xt">RX 6600 XT</option>
+            <option value="rx6700xt">RX 6700 XT</option>
+            <option value="rx7600">RX 7600</option>
+            <option value="rx7800xt">RX 7800 XT</option>
+            <option value="rx7900xtx">RX 7900 XTX</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ram">RAM</label>
+          <select id="ram">
+            <option value="8gbddr4">8GB DDR4</option>
+            <option value="16gbddr4">16GB DDR4</option>
+            <option value="16gbddr5" selected>16GB DDR5</option>
+            <option value="32gbddr5">32GB DDR5</option>
+            <option value="64gbddr5">64GB DDR5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="resolution">Resolution</label>
+          <select id="resolution">
+            <option value="1080p" selected>1080p</option>
+            <option value="1440p">1440p</option>
+            <option value="4k">4K</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="gameType">Game Type</label>
+          <select id="gameType">
+            <option value="competitive">Competitive FPS</option>
+            <option value="aaa">AAA / Open World</option>
+            <option value="strategy">Strategy / Simulation</option>
+            <option value="streaming">Streaming</option>
+          </select>
+        </div>
+        <button class="btn-calculate" onclick="calculateBottleneck()">Calculate Bottleneck</button>
+      </div>
+
+      <div class="calc-results" id="results">
+        <div class="result-highlight">
+          <div class="label">Bottleneck</div>
+          <div class="value" id="bottleneckPct">0%</div>
+        </div>
+        <div class="result-details">
+          <div class="result-item">
+            <div class="label">Limiting Component</div>
+            <div class="value" id="limitingComponent">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Estimated FPS Range</div>
+            <div class="value" id="fpsRange">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Bottleneck Severity</div>
+            <div class="value" id="severity">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Upgrade Recommendation</div>
+            <div class="value" id="upgradeRec">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-card">
+        <div class="cta-icon">&#127918;</div>
+        <h3>Optimize Your Gaming Experience</h3>
+        <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+        <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+        <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <div class="seo-block">
+      <h2>What Is a PC Bottleneck?</h2>
+      <p>A bottleneck happens when one component in your gaming PC cannot keep up with the rest, limiting overall performance. The two most common bottlenecks are CPU bottlenecks and GPU bottlenecks.</p>
+      <p>When your CPU is the bottleneck, your graphics card sits partially idle because the processor can't prepare frames fast enough. When your GPU is the bottleneck, the processor has headroom to spare but the graphics card can't render frames quickly enough.</p>
+      <h3>How to Identify a Bottleneck</h3>
+      <ul>
+        <li>Monitor CPU and GPU usage while gaming using Task Manager or MSI Afterburner</li>
+        <li>If your GPU usage is below 90% and CPU is near 100%, you have a CPU bottleneck</li>
+        <li>If your GPU is at 100% and CPU is well below that, you have a GPU bottleneck</li>
+        <li>Both components near 100% means a well-balanced system</li>
+      </ul>
+    </div>
+    <div class="seo-block">
+      <h2>How This Calculator Works</h2>
+      <p>Our bottleneck calculator evaluates your CPU and GPU based on performance benchmark scores, then adjusts for resolution and game type to estimate which component is holding back your system.</p>
+      <h3>Factors We Consider</h3>
+      <ul>
+        <li><strong>CPU performance score</strong> — based on single-thread and multi-thread benchmarks</li>
+        <li><strong>GPU performance score</strong> — based on rasterization and ray tracing benchmarks</li>
+        <li><strong>Resolution scaling</strong> — higher resolutions shift load toward the GPU</li>
+        <li><strong>Game type demands</strong> — competitive games favor CPU; AAA titles favor GPU</li>
+        <li><strong>RAM capacity</strong> — insufficient RAM can cause stutters and frame drops</li>
+      </ul>
+      <p>A bottleneck under 10% is generally considered acceptable. Between 10-20% is noticeable, and above 20% means a significant performance imbalance.</p>
+    </div>
+    <div class="seo-block full-width">
+      <h2>Frequently Asked Questions</h2>
+      <h3>What is a bottleneck?</h3>
+      <p>A bottleneck occurs when one component in your PC (usually the CPU or GPU) limits the performance of the others. For example, if you pair a weak CPU with a powerful GPU, the CPU can't feed data fast enough, and the GPU sits idle waiting — that's a CPU bottleneck.</p>
+      <h3>How do I fix a CPU bottleneck?</h3>
+      <p>To fix a CPU bottleneck: upgrade to a faster CPU, increase RAM speed, enable XMP/EXPO in BIOS, close background apps, or lower CPU-intensive settings like draw distance and physics. Playing at higher resolutions can also shift load back to the GPU.</p>
+      <h3>How do I fix a GPU bottleneck?</h3>
+      <p>To fix a GPU bottleneck: upgrade to a more powerful GPU, lower in-game graphics settings, reduce resolution, enable DLSS or FSR upscaling, update GPU drivers, or ensure proper cooling to prevent thermal throttling.</p>
+    </div>
+  </div>
+
+  <div class="seo-block full-width" style="margin-top:1.5rem;">
+    <p style="font-size:0.8rem;color:var(--text-light);line-height:1.6;"><strong>Disclaimer:</strong> This bottleneck calculator provides estimates based on general hardware benchmarks and typical gaming workloads. Actual performance may vary depending on specific game engines, driver versions, overclocking, cooling, and other system components. Results are for informational purposes only and should not be the sole basis for hardware purchasing decisions.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="cross-site-links">
+      <span>Our Sites:</span>
+      <a href="https://gamebench.tools/">GameBench</a>
+      <a href="https://fitcalc.health/">FitCalc</a>
+      <a href="https://insurewise.tools/">InsureWise</a>
+      <a href="https://financecalc.tools/">FinanceCalc</a>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 GameBench. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const cpuScores = {
+  'i3-12100F': 3, 'i5-12400F': 5, 'i5-13600K': 7.5, 'i7-13700K': 8.5,
+  'i7-14700K': 9, 'i9-13900K': 9.5, 'r5-5600x': 5.5, 'r7-5800x3d': 7.5,
+  'r7-7800x3d': 9.5, 'r9-7950x': 10
+};
+const gpuScores = {
+  'rtx3060': 4, 'rtx3060ti': 5, 'rtx3070': 5.5, 'rtx3080': 7,
+  'rtx4060': 5.5, 'rtx4060ti': 6, 'rtx4070': 7, 'rtx4070s': 7.5,
+  'rtx4080': 8.5, 'rtx4090': 10, 'rx6600xt': 4, 'rx6700xt': 5,
+  'rx7600': 5, 'rx7800xt': 6.5, 'rx7900xtx': 8.5
+};
+
+function calculateBottleneck() {
+  const cpu = document.getElementById('cpu').value;
+  const gpu = document.getElementById('gpu').value;
+  const ram = document.getElementById('ram').value;
+  const res = document.getElementById('resolution').value;
+  const gameType = document.getElementById('gameType').value;
+
+  let cpuScore = cpuScores[cpu] || 5;
+  let gpuScore = gpuScores[gpu] || 5;
+
+  // Resolution factor
+  if (res === '1080p') { cpuScore *= 1.3; }
+  else if (res === '4k') { gpuScore *= 1.3; }
+
+  // Game type factor
+  if (gameType === 'competitive') { cpuScore *= 1.3; }
+  else if (gameType === 'aaa') { gpuScore *= 1.3; }
+  else if (gameType === 'strategy') { cpuScore *= 1.2; }
+  else if (gameType === 'streaming') { cpuScore *= 1.4; }
+
+  const bottleneckPct = Math.abs(cpuScore - gpuScore) / Math.max(cpuScore, gpuScore) * 100;
+  const limiting = cpuScore < gpuScore ? 'CPU' : 'GPU';
+
+  // Estimated FPS based on weaker component
+  const weakerScore = Math.min(cpuScore, gpuScore);
+  let baseFps = weakerScore * 18;
+  if (res === '1440p') baseFps *= 0.7;
+  else if (res === '4k') baseFps *= 0.4;
+  const fpsMin = Math.round(baseFps * 0.8);
+  const fpsMax = Math.round(baseFps * 1.1);
+
+  let severity, upgradeRec;
+  if (bottleneckPct < 10) {
+    severity = 'Minimal';
+    upgradeRec = 'System is well balanced. No upgrade needed.';
+  } else if (bottleneckPct < 20) {
+    severity = 'Moderate';
+    upgradeRec = limiting === 'CPU' ? 'Consider upgrading your CPU for better performance.' : 'Consider upgrading your GPU for better performance.';
+  } else {
+    severity = 'Significant';
+    upgradeRec = limiting === 'CPU' ? 'Your CPU is significantly bottlenecking. A CPU upgrade is recommended.' : 'Your GPU is significantly bottlenecking. A GPU upgrade is recommended.';
+  }
+
+  // RAM warning
+  if (ram === '8gbddr4') {
+    upgradeRec += ' Also consider upgrading to at least 16GB RAM.';
+  }
+
+  document.getElementById('bottleneckPct').textContent = bottleneckPct.toFixed(1) + '%';
+  document.getElementById('limitingComponent').textContent = limiting;
+  document.getElementById('fpsRange').textContent = fpsMin + ' - ' + fpsMax + ' FPS';
+  document.getElementById('severity').textContent = severity;
+  document.getElementById('upgradeRec').textContent = upgradeRec;
+  document.getElementById('results').classList.add('visible');
+}
+
+calculateBottleneck();
+</script>
+</body>
+</html>
