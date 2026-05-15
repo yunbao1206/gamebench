@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS Calculator - Estimate Frame Rates for Popular Games | GameBench</title>
+  <meta name="description" content="Free FPS calculator to estimate frame rates for popular games like Valorant, CS2, Cyberpunk 2077, and more based on your PC specs.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gamebench.tools/"},
+      {"@type": "ListItem", "position": 2, "name": "FPS Calculator", "item": "https://gamebench.tools/fps-calculator/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is the FPS calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The FPS calculator provides estimates based on benchmark data and typical hardware performance. Actual FPS may vary depending on game engine optimization, driver versions, overclocking, cooling, background processes, and specific in-game scenes. Use results as a general guideline for hardware decisions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is 1% low FPS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1% low FPS represents the slowest 1% of frames during gameplay. It indicates the worst-case performance you'll experience and is a better indicator of smoothness than average FPS. A large gap between average FPS and 1% low FPS indicates stuttering issues."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much RAM do I need for gaming?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "16GB of RAM is the current standard for gaming. 8GB is insufficient for most modern AAA titles and will cause stuttering. 32GB is beneficial for heavy multitasking, streaming while gaming, or playing simulation games. 64GB is overkill for pure gaming."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      GameBench
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/" class="active">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <nav class="breadcrumb">
+    <a href="/">Home</a> &rsaquo; <span>FPS Calculator</span>
+  </nav>
+
+  <div class="calc-page">
+    <h1>FPS Calculator</h1>
+    <p class="subtitle">Estimate frame rates for popular games based on your hardware configuration.</p>
+
+    <div class="calc-tool">
+      <div class="calc-form" id="fpsForm">
+        <div class="form-group">
+          <label for="cpu">CPU</label>
+          <select id="cpu">
+            <option value="i3-12100F">Intel Core i3-12100F</option>
+            <option value="i5-12400F">Intel Core i5-12400F</option>
+            <option value="i5-13600K">Intel Core i5-13600K</option>
+            <option value="i7-13700K" selected>Intel Core i7-13700K</option>
+            <option value="i7-14700K">Intel Core i7-14700K</option>
+            <option value="i9-13900K">Intel Core i9-13900K</option>
+            <option value="r5-5600x">AMD Ryzen 5 5600X</option>
+            <option value="r7-5800x3d">AMD Ryzen 7 5800X3D</option>
+            <option value="r7-7800x3d">AMD Ryzen 7 7800X3D</option>
+            <option value="r9-7950x">AMD Ryzen 9 7950X</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gpu">GPU</label>
+          <select id="gpu">
+            <option value="rtx3060">RTX 3060</option>
+            <option value="rtx3060ti">RTX 3060 Ti</option>
+            <option value="rtx3070">RTX 3070</option>
+            <option value="rtx3080">RTX 3080</option>
+            <option value="rtx4060">RTX 4060</option>
+            <option value="rtx4060ti">RTX 4060 Ti</option>
+            <option value="rtx4070" selected>RTX 4070</option>
+            <option value="rtx4070s">RTX 4070 Super</option>
+            <option value="rtx4080">RTX 4080</option>
+            <option value="rtx4090">RTX 4090</option>
+            <option value="rx6600xt">RX 6600 XT</option>
+            <option value="rx6700xt">RX 6700 XT</option>
+            <option value="rx7600">RX 7600</option>
+            <option value="rx7800xt">RX 7800 XT</option>
+            <option value="rx7900xtx">RX 7900 XTX</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ram">RAM</label>
+          <select id="ram">
+            <option value="8gbddr4">8GB DDR4</option>
+            <option value="16gbddr4">16GB DDR4</option>
+            <option value="16gbddr5" selected>16GB DDR5</option>
+            <option value="32gbddr5">32GB DDR5</option>
+            <option value="64gbddr5">64GB DDR5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="resolution">Resolution</label>
+          <select id="resolution">
+            <option value="1080p" selected>1080p</option>
+            <option value="1440p">1440p</option>
+            <option value="4k">4K</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="game">Game</label>
+          <select id="game">
+            <option value="valorant">Valorant</option>
+            <option value="cs2">CS2</option>
+            <option value="apex">Apex Legends</option>
+            <option value="fortnite">Fortnite</option>
+            <option value="cyberpunk">Cyberpunk 2077</option>
+            <option value="eldenring">Elden Ring</option>
+            <option value="hogwarts">Hogwarts Legacy</option>
+            <option value="warzone">Call of Duty Warzone</option>
+            <option value="minecraft">Minecraft</option>
+            <option value="gtav">GTA V</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="settings">Settings</label>
+          <select id="settings">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high" selected>High</option>
+            <option value="ultra">Ultra</option>
+          </select>
+        </div>
+        <button class="btn-calculate" onclick="calculateFPS()">Calculate FPS</button>
+      </div>
+
+      <div class="calc-results" id="results">
+        <div class="result-highlight">
+          <div class="label">Estimated FPS</div>
+          <div class="value" id="estimatedFps">0</div>
+        </div>
+        <div class="result-details">
+          <div class="result-item">
+            <div class="label">1% Low FPS</div>
+            <div class="value" id="onePercentLow">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Bottleneck Status</div>
+            <div class="value" id="bottleneckStatus">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Performance Rating</div>
+            <div class="value" id="perfRating">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Settings Recommendation</div>
+            <div class="value" id="settingsRec">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-card">
+        <div class="cta-icon">&#127918;</div>
+        <h3>Optimize Your Gaming Experience</h3>
+        <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+        <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+        <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <div class="seo-block">
+      <h2>How FPS Is Calculated</h2>
+      <p>Our FPS estimator uses GPU benchmark performance as a baseline, then adjusts for resolution, graphics settings, game engine intensity, CPU capability, and RAM capacity to provide a realistic frame rate estimate.</p>
+      <h3>Calculation Factors</h3>
+      <ul>
+        <li><strong>GPU base FPS</strong> — maximum frame rate for each GPU at 1080p High</li>
+        <li><strong>Resolution multiplier</strong> — 1080p (1.0x), 1440p (0.65x), 4K (0.35x)</li>
+        <li><strong>Settings multiplier</strong> — Low (1.6x), Medium (1.25x), High (1.0x), Ultra (0.7x)</li>
+        <li><strong>Game intensity</strong> — each game engine has different demands</li>
+        <li><strong>CPU penalty</strong> — weak CPU reduces FPS by up to 20%</li>
+        <li><strong>RAM penalty</strong> — insufficient RAM reduces FPS for demanding games</li>
+      </ul>
+    </div>
+    <div class="seo-block">
+      <h2>Understanding Frame Rates</h2>
+      <p>FPS (Frames Per Second) measures how many images your PC renders each second. Higher FPS means smoother gameplay and faster reaction times in competitive games.</p>
+      <h3>FPS Targets by Game Type</h3>
+      <ul>
+        <li><strong>Competitive FPS (Valorant, CS2):</strong> 144+ FPS ideal, 240+ for pros</li>
+        <li><strong>Battle Royale (Apex, Warzone):</strong> 120+ FPS for smooth experience</li>
+        <li><strong>AAA Games (Cyberpunk, Elden Ring):</strong> 60 FPS minimum, 80+ for comfort</li>
+        <li><strong>Casual (Minecraft, GTA V):</strong> 60 FPS is generally sufficient</li>
+      </ul>
+      <p>The 1% low FPS is equally important — it shows the worst 1% of frame times. If your 1% low is much lower than average FPS, you'll experience stutters despite a seemingly good average.</p>
+    </div>
+    <div class="seo-block full-width">
+      <h2>Frequently Asked Questions</h2>
+      <h3>How accurate is the FPS calculator?</h3>
+      <p>The FPS calculator provides estimates based on benchmark data and typical hardware performance. Actual FPS may vary depending on game engine optimization, driver versions, overclocking, cooling, background processes, and specific in-game scenes. Use results as a general guideline for hardware decisions.</p>
+      <h3>What is 1% low FPS?</h3>
+      <p>1% low FPS represents the slowest 1% of frames during gameplay. It indicates the worst-case performance you'll experience and is a better indicator of smoothness than average FPS. A large gap between average FPS and 1% low FPS indicates stuttering issues.</p>
+      <h3>How much RAM do I need for gaming?</h3>
+      <p>16GB of RAM is the current standard for gaming. 8GB is insufficient for most modern AAA titles and will cause stuttering. 32GB is beneficial for heavy multitasking, streaming while gaming, or playing simulation games. 64GB is overkill for pure gaming.</p>
+    </div>
+  </div>
+
+  <div class="seo-block full-width" style="margin-top:1.5rem;">
+    <p style="font-size:0.8rem;color:var(--text-light);line-height:1.6;"><strong>Disclaimer:</strong> This FPS calculator provides estimates based on general benchmark data and typical gaming workloads. Actual frame rates may vary significantly depending on specific game patches, driver versions, system configuration, overclocking, cooling, and background applications. Results are for informational purposes only.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="cross-site-links">
+      <span>Our Sites:</span>
+      <a href="https://gamebench.tools/">GameBench</a>
+      <a href="https://fitcalc.health/">FitCalc</a>
+      <a href="https://insurewise.tools/">InsureWise</a>
+      <a href="https://financecalc.tools/">FinanceCalc</a>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 GameBench. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const cpuScores = {
+  'i3-12100F': 3, 'i5-12400F': 5, 'i5-13600K': 7.5, 'i7-13700K': 8.5,
+  'i7-14700K': 9, 'i9-13900K': 9.5, 'r5-5600x': 5.5, 'r7-5800x3d': 7.5,
+  'r7-7800x3d': 9.5, 'r9-7950x': 10
+};
+const gpuBaseFps = {
+  'rtx3060': 130, 'rtx3060ti': 160, 'rtx3070': 175, 'rtx3080': 210,
+  'rtx4060': 170, 'rtx4060ti': 195, 'rtx4070': 220, 'rtx4070s': 240,
+  'rtx4080': 300, 'rtx4090': 380, 'rx6600xt': 120, 'rx6700xt': 150,
+  'rx7600': 155, 'rx7800xt': 210, 'rx7900xtx': 310
+};
+const resMultiplier = { '1080p': 1.0, '1440p': 0.65, '4k': 0.35 };
+const settingsMultiplier = { 'low': 1.6, 'medium': 1.25, 'high': 1.0, 'ultra': 0.7 };
+const gameIntensity = {
+  'valorant': 2.5, 'cs2': 2.0, 'apex': 1.5, 'fortnite': 1.6,
+  'cyberpunk': 0.6, 'eldenring': 0.7, 'hogwarts': 0.55,
+  'warzone': 0.9, 'minecraft': 3.0, 'gtav': 1.2
+};
+const aaaGames = ['cyberpunk', 'eldenring', 'hogwarts', 'warzone'];
+
+function calculateFPS() {
+  const cpu = document.getElementById('cpu').value;
+  const gpu = document.getElementById('gpu').value;
+  const ram = document.getElementById('ram').value;
+  const res = document.getElementById('resolution').value;
+  const game = document.getElementById('game').value;
+  const settings = document.getElementById('settings').value;
+
+  const baseFps = gpuBaseFps[gpu] || 150;
+  const cpuScore = cpuScores[cpu] || 5;
+  const gpuScore = Object.keys(gpuBaseFps).indexOf(gpu);
+
+  let fps = baseFps;
+  fps *= resMultiplier[res];
+  fps *= settingsMultiplier[settings];
+  fps *= gameIntensity[game];
+
+  // CPU penalty
+  const gpuPowerScore = (gpuBaseFps[gpu] || 150) / 38;
+  if (cpuScore < gpuPowerScore * 0.7) {
+    fps *= 0.8;
+  }
+
+  // RAM penalty
+  if (ram === '8gbddr4' && aaaGames.includes(game)) {
+    fps *= 0.85;
+  }
+
+  fps = Math.round(fps);
+  const onePercentLow = Math.round(fps * 0.7);
+
+  let bottleneck = 'Balanced';
+  const gpuPwr = (gpuBaseFps[gpu] || 150) / 38;
+  if (cpuScore < gpuPwr * 0.7) {
+    bottleneck = 'CPU Bottleneck';
+  } else if (cpuScore > gpuPwr * 1.4) {
+    bottleneck = 'GPU Bottleneck';
+  }
+
+  let perfRating, settingsRec;
+  if (fps >= 144) {
+    perfRating = 'Excellent';
+    settingsRec = 'Great performance. Try higher settings if desired.';
+  } else if (fps >= 60) {
+    perfRating = 'Good';
+    settingsRec = 'Smooth gameplay. Consider tweaking for more FPS.';
+  } else if (fps >= 30) {
+    perfRating = 'Playable';
+    settingsRec = 'Lower settings or resolution for smoother gameplay.';
+  } else {
+    perfRating = 'Poor';
+    settingsRec = 'Significant upgrade needed for enjoyable experience.';
+  }
+
+  document.getElementById('estimatedFps').textContent = fps + ' FPS';
+  document.getElementById('onePercentLow').textContent = onePercentLow + ' FPS';
+  document.getElementById('bottleneckStatus').textContent = bottleneck;
+  document.getElementById('perfRating').textContent = perfRating;
+  document.getElementById('settingsRec').textContent = settingsRec;
+  document.getElementById('results').classList.add('visible');
+}
+
+calculateFPS();
+</script>
+</body>
+</html>
