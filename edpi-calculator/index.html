@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eDPI Calculator - Effective Mouse Sensitivity | GameBench</title>
+  <meta name="description" content="Free eDPI calculator to find your effective mouse sensitivity. Calculate cm/360 and compare to pro player averages for Valorant, CS2, Apex, and more.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gamebench.tools/"},
+      {"@type": "ListItem", "position": 2, "name": "eDPI Calculator", "item": "https://gamebench.tools/edpi-calculator/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is eDPI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "eDPI (effective Dots Per Inch) is your mouse DPI multiplied by your in-game sensitivity. It represents your true mouse sensitivity in a single number, making it easy to compare settings across different mice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is cm/360?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "cm/360 is the distance in centimeters you need to move your mouse to do a full 360-degree turn in-game. It is the most universal way to compare sensitivity across games because it accounts for different sensitivity scales."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What eDPI do pros use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pro player eDPI varies by game. Valorant pros average around 280 eDPI. CS2 pros average around 880 eDPI. Apex Legends pros average around 1100 eDPI. Most pros use a DPI between 400-1600 and adjust in-game sensitivity accordingly."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      GameBench
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/" class="active">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <nav class="breadcrumb">
+    <a href="/">Home</a> &rsaquo; <span>eDPI Calculator</span>
+  </nav>
+
+  <div class="calc-page">
+    <h1>eDPI Calculator</h1>
+    <p class="subtitle">Calculate your effective mouse sensitivity and compare it to pro player averages.</p>
+
+    <div class="calc-tool">
+      <div class="calc-form" id="edpiForm">
+        <div class="form-group">
+          <label for="dpi">Mouse DPI</label>
+          <input type="number" id="dpi" value="800" min="100" max="32000" step="50">
+        </div>
+        <div class="form-group">
+          <label for="sensitivity">In-game Sensitivity</label>
+          <input type="number" id="sensitivity" value="1.0" min="0.001" max="100" step="0.01">
+        </div>
+        <div class="form-group full-width">
+          <label for="game">Game</label>
+          <select id="game">
+            <option value="valorant">Valorant</option>
+            <option value="cs2">CS2</option>
+            <option value="apex">Apex Legends</option>
+            <option value="fortnite">Fortnite</option>
+            <option value="ow2">Overwatch 2</option>
+            <option value="r6">Rainbow Six Siege</option>
+            <option value="cod">Call of Duty</option>
+            <option value="minecraft">Minecraft</option>
+            <option value="rust">Rust</option>
+            <option value="destiny2">Destiny 2</option>
+          </select>
+        </div>
+        <button class="btn-calculate" onclick="calculateEDPI()">Calculate eDPI</button>
+      </div>
+
+      <div class="calc-results" id="results">
+        <div class="result-highlight">
+          <div class="label">Your eDPI</div>
+          <div class="value" id="edpiValue">0</div>
+        </div>
+        <div class="result-details">
+          <div class="result-item">
+            <div class="label">cm/360</div>
+            <div class="value" id="cm360">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">in/360</div>
+            <div class="value" id="in360">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Pro Average eDPI</div>
+            <div class="value" id="proAvg">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Comparison</div>
+            <div class="value" id="comparison">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-card">
+        <div class="cta-icon">&#127918;</div>
+        <h3>Optimize Your Gaming Experience</h3>
+        <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+        <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+        <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <div class="seo-block">
+      <h2>What Is eDPI?</h2>
+      <p>eDPI (effective Dots Per Inch) combines your mouse hardware DPI and in-game sensitivity into a single number. This makes it easy to compare your sensitivity with other players regardless of what mouse they use.</p>
+      <h3>The Formula</h3>
+      <p><strong>eDPI = Mouse DPI &times; In-game Sensitivity</strong></p>
+      <p>For example, a DPI of 800 with an in-game sensitivity of 0.5 gives you an eDPI of 400. If another player uses 400 DPI with 1.0 sensitivity, they also have an eDPI of 400 — the mouse feels exactly the same.</p>
+      <h3>Why eDPI Matters</h3>
+      <ul>
+        <li>Compare sensitivity across different mice and games</li>
+        <li>Find what pros use and replicate their settings</li>
+        <li>Communicate sensitivity as a single number</li>
+        <li>Easily switch mice without changing how the game feels</li>
+      </ul>
+    </div>
+    <div class="seo-block">
+      <h2>Understanding cm/360</h2>
+      <p>While eDPI is useful, cm/360 is the most universal sensitivity metric because it accounts for each game's unique sensitivity scale. It tells you exactly how many centimeters of mouse movement equals one full turn in-game.</p>
+      <h3>Pro Player Averages</h3>
+      <ul>
+        <li><strong>Valorant:</strong> ~280 eDPI (approx 34 cm/360)</li>
+        <li><strong>CS2:</strong> ~880 eDPI (approx 34 cm/360)</li>
+        <li><strong>Apex Legends:</strong> ~1100 eDPI (approx 28 cm/360)</li>
+        <li><strong>Fortnite:</strong> ~640 eDPI (approx 36 cm/360)</li>
+      </ul>
+      <p>Notice that pro players across different games tend to use similar cm/360 values (28-36 cm), even though their eDPI numbers vary widely due to different sensitivity scales.</p>
+    </div>
+    <div class="seo-block full-width">
+      <h2>Frequently Asked Questions</h2>
+      <h3>What is eDPI?</h3>
+      <p>eDPI (effective Dots Per Inch) is your mouse DPI multiplied by your in-game sensitivity. It represents your true mouse sensitivity in a single number, making it easy to compare settings across different mice.</p>
+      <h3>What is cm/360?</h3>
+      <p>cm/360 is the distance in centimeters you need to move your mouse to do a full 360-degree turn in-game. It is the most universal way to compare sensitivity across games because it accounts for different sensitivity scales.</p>
+      <h3>What eDPI do pros use?</h3>
+      <p>Pro player eDPI varies by game. Valorant pros average around 280 eDPI. CS2 pros average around 880 eDPI. Apex Legends pros average around 1100 eDPI. Most pros use a DPI between 400-1600 and adjust in-game sensitivity accordingly.</p>
+    </div>
+  </div>
+
+  <div class="seo-block full-width" style="margin-top:1.5rem;">
+    <p style="font-size:0.8rem;color:var(--text-light);line-height:1.6;"><strong>Disclaimer:</strong> This eDPI calculator uses approximate yaw values for each game. Some games may use slightly different sensitivity scales depending on version, field of view settings, or other factors. Pro average values are approximate and based on aggregated data from professional players.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="cross-site-links">
+      <span>Our Sites:</span>
+      <a href="https://gamebench.tools/">GameBench</a>
+      <a href="https://fitcalc.health/">FitCalc</a>
+      <a href="https://insurewise.tools/">InsureWise</a>
+      <a href="https://financecalc.tools/">FinanceCalc</a>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 GameBench. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const gameYaw = {
+  'valorant': 0.07, 'cs2': 0.022, 'apex': 0.022, 'fortnite': 0.022,
+  'ow2': 0.0066, 'r6': 1.1, 'cod': 0.022, 'minecraft': 0.15,
+  'rust': 0.1, 'destiny2': 0.033
+};
+const proAverages = {
+  'valorant': { edpi: 280, label: '~280' },
+  'cs2': { edpi: 880, label: '~880' },
+  'apex': { edpi: 1100, label: '~1100' },
+  'fortnite': { edpi: 640, label: '~640' },
+  'ow2': { edpi: 4800, label: '~4800' },
+  'r6': { edpi: 50, label: '~50' },
+  'cod': { edpi: 1000, label: '~1000' },
+  'minecraft': { edpi: 800, label: 'N/A' },
+  'rust': { edpi: 400, label: 'N/A' },
+  'destiny2': { edpi: 800, label: '~800' }
+};
+
+function calculateEDPI() {
+  const dpi = parseFloat(document.getElementById('dpi').value) || 800;
+  const sens = parseFloat(document.getElementById('sensitivity').value) || 1;
+  const game = document.getElementById('game').value;
+
+  const edpi = dpi * sens;
+  const yaw = gameYaw[game] || 0.022;
+  const cm360 = (2.54 * 360) / (dpi * sens * yaw);
+  const in360 = cm360 / 2.54;
+
+  document.getElementById('edpiValue').textContent = Math.round(edpi * 100) / 100;
+  document.getElementById('cm360').textContent = cm360.toFixed(2) + ' cm';
+  document.getElementById('in360').textContent = in360.toFixed(2) + ' in';
+
+  const pro = proAverages[game];
+  document.getElementById('proAvg').textContent = pro.label;
+
+  if (pro.label === 'N/A') {
+    document.getElementById('comparison').textContent = 'No pro data available';
+  } else {
+    const ratio = edpi / pro.edpi;
+    if (ratio > 1.2) {
+      document.getElementById('comparison').textContent = 'Higher than pros (' + Math.round((ratio - 1) * 100) + '% faster)';
+    } else if (ratio < 0.8) {
+      document.getElementById('comparison').textContent = 'Lower than pros (' + Math.round((1 - ratio) * 100) + '% slower)';
+    } else {
+      document.getElementById('comparison').textContent = 'Similar to pros (within 20%)';
+    }
+  }
+
+  document.getElementById('results').classList.add('visible');
+}
+
+calculateEDPI();
+</script>
+</body>
+</html>
