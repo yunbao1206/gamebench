@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ping & Latency Calculator - Estimate Network Delay | GameBench</title>
+  <meta name="description" content="Free ping and latency calculator. Estimate your network delay based on server distance, connection type, hops, and packet size. Optimize your gaming connection.">
+  <meta name="keywords" content="ping calculator, latency calculator, network delay estimator, gaming ping, lag calculator, server latency">
+  <link rel="canonical" href="https://game.wiseclick.site/ping-calculator/">
+  <meta property="og:title" content="Ping & Latency Calculator - Estimate Network Delay | GameBench">
+  <meta property="og:description" content="Estimate your network delay based on server distance, connection type, and network hops.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Ping & Latency Calculator",
+    "description": "Estimate network delay based on distance, connection type, and hops",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a good ping for gaming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under 20ms is excellent and ideal for competitive gaming. 20-50ms is good for most online games. 50-100ms is fair and acceptable for casual play. Above 100ms will cause noticeable lag in fast-paced games."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is fiber better for gaming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fiber optic connections have the lowest latency overhead (about 2ms) because signals travel as light through glass. Fiber also has symmetrical upload/download speeds and minimal jitter, making it the best connection type for gaming."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does distance affect ping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Data cannot travel faster than the speed of light. In fiber optic cables, signals travel at about 200,000 km/s. This means every 1,000 km of distance adds about 5ms of one-way latency (10ms round trip). Physical distance to the server is the single biggest factor in your base ping."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://game.wiseclick.site/" },
+      { "@type": "ListItem", "position": 2, "name": "Ping & Latency Calculator", "item": "https://game.wiseclick.site/ping-calculator/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        GameBench
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb">
+      <a href="/">Home</a> / <span>Ping & Latency Calculator</span>
+    </nav>
+
+    <div class="calc-page">
+      <h1>Ping & Latency Calculator</h1>
+      <p class="subtitle">Estimate your network delay based on server distance, connection type, and network conditions.</p>
+
+      <div class="calc-tool">
+        <form class="calc-form" id="ping-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="server-distance">Distance to Server (km)</label>
+            <input type="number" id="server-distance" value="500" min="1" step="10">
+          </div>
+          <div class="form-group">
+            <label for="connection-type">Connection Type</label>
+            <select id="connection-type">
+              <option value="2" selected>Fiber</option>
+              <option value="5">Cable</option>
+              <option value="15">DSL</option>
+              <option value="25">4G/LTE</option>
+              <option value="8">5G</option>
+              <option value="600">Satellite</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="num-hops">Number of Hops</label>
+            <select id="num-hops">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="packet-size">Packet Size</label>
+            <select id="packet-size">
+              <option value="64" selected>64 bytes</option>
+              <option value="256">256 bytes</option>
+              <option value="512">512 bytes</option>
+              <option value="1024">1024 bytes</option>
+              <option value="1500">1500 bytes</option>
+            </select>
+          </div>
+          <button type="button" class="btn-calculate" onclick="calculatePing()">Calculate Ping</button>
+        </form>
+
+        <div class="calc-results" id="results">
+          <div class="result-highlight">
+            <div class="label">Estimated Ping</div>
+            <div class="value" id="estimated-ping">0 ms</div>
+          </div>
+          <div class="result-details">
+            <div class="result-item">
+              <div class="label">Propagation Delay</div>
+              <div class="value" id="propagation-delay">0 ms</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Connection Overhead</div>
+              <div class="value" id="connection-overhead">0 ms</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Hop Overhead</div>
+              <div class="value" id="hop-overhead">0 ms</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Packet Processing</div>
+              <div class="value" id="packet-processing">0 ms</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Connection Rating</div>
+              <div class="value" id="connection-rating">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="cta-section">
+          <div class="cta-card">
+            <div class="cta-icon">🎮</div>
+            <h3>Optimize Your Gaming Experience</h3>
+            <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+            <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+            <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="seo-content">
+        <div class="seo-block">
+          <h2>What Is Ping and Why Does It Matter?</h2>
+          <p>Ping measures the round-trip time for data to travel from your device to a server and back. In gaming, lower ping means your actions register faster on the game server. High ping causes lag, rubber-banding, and missed inputs.</p>
+          <p>Your ping is affected by three main factors: <strong>physical distance</strong> to the server, your <strong>connection type</strong>, and the number of <strong>network hops</strong> between you and the server.</p>
+        </div>
+        <div class="seo-block">
+          <h2>Connection Type Comparison</h2>
+          <ul>
+            <li><strong>Fiber</strong> (+2ms) — Lowest latency, best for competitive gaming.</li>
+            <li><strong>Cable</strong> (+5ms) — Low latency, good for most gaming.</li>
+            <li><strong>5G</strong> (+8ms) — Wireless but low latency in good coverage areas.</li>
+            <li><strong>DSL</strong> (+15ms) — Moderate latency, acceptable for casual play.</li>
+            <li><strong>4G/LTE</strong> (+25ms) — Higher latency, not ideal for fast-paced games.</li>
+            <li><strong>Satellite</strong> (+600ms) — Very high latency, not suitable for real-time gaming.</li>
+          </ul>
+        </div>
+        <div class="seo-block full-width">
+          <h2>Frequently Asked Questions</h2>
+          <h3>What is a good ping for gaming?</h3>
+          <p>Under 20ms is excellent and ideal for competitive gaming. 20-50ms is good for most online games. 50-100ms is fair and acceptable for casual play. Above 100ms will cause noticeable lag in fast-paced games.</p>
+          <h3>Why is fiber better for gaming?</h3>
+          <p>Fiber optic connections have the lowest latency overhead (about 2ms) because signals travel as light through glass. Fiber also has symmetrical upload/download speeds and minimal jitter, making it the best connection type for gaming.</p>
+          <h3>How does distance affect ping?</h3>
+          <p>Data cannot travel faster than the speed of light. In fiber optic cables, signals travel at about 200,000 km/s. This means every 1,000 km of distance adds about 5ms of one-way latency (10ms round trip). Physical distance to the server is the single biggest factor in your base ping.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block full-width" style="background:var(--bg-secondary);border-style:dashed;margin-top:1rem">
+      <h2>Disclaimer</h2>
+      <p>This ping calculator is for <strong>estimation purposes only</strong>. Actual network latency depends on many factors including ISP routing, network congestion, server load, and local network conditions. Results are theoretical estimates, not measured values.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+      </ul>
+      <div class="cross-site-links"><span>More WiseClick Tools:</span><a href="https://calc.wiseclick.site/" target="_blank" rel="noopener">Finance</a><a href="https://insure.wiseclick.site/" target="_blank" rel="noopener">Insurance</a><a href="https://fit.wiseclick.site/" target="_blank" rel="noopener">Health</a></div>
+      <p class="footer-copy">&copy; 2026 GameBench by WiseClick. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  function calculatePing() {
+    const distance = parseFloat(document.getElementById('server-distance').value) || 0;
+    const connOverhead = parseFloat(document.getElementById('connection-type').value) || 0;
+    const hops = parseFloat(document.getElementById('num-hops').value) || 0;
+    const packetSize = parseFloat(document.getElementById('packet-size').value) || 0;
+
+    const SPEED_OF_LIGHT_FIBER = 200000; // km/s
+    const baseLatency = (distance / SPEED_OF_LIGHT_FIBER) * 1000 * 2; // round trip in ms
+    const hopOverhead = hops * 0.5;
+    const packetProcessing = (packetSize / 1000) * 0.1;
+    const totalPing = baseLatency + connOverhead + hopOverhead + packetProcessing;
+
+    let rating;
+    if (totalPing < 20) rating = 'Excellent';
+    else if (totalPing <= 50) rating = 'Good';
+    else if (totalPing <= 100) rating = 'Fair';
+    else rating = 'Poor';
+
+    const ms = v => v.toFixed(2) + ' ms';
+
+    document.getElementById('estimated-ping').textContent = ms(totalPing);
+    document.getElementById('propagation-delay').textContent = ms(baseLatency);
+    document.getElementById('connection-overhead').textContent = ms(connOverhead);
+    document.getElementById('hop-overhead').textContent = ms(hopOverhead);
+    document.getElementById('packet-processing').textContent = ms(packetProcessing);
+    document.getElementById('connection-rating').textContent = rating;
+    document.getElementById('results').classList.add('visible');
+  }
+
+  calculatePing();
+  </script>
+</body>
+</html>
