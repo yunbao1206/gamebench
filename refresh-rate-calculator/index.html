@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refresh Rate vs FPS Calculator - Display Sync Analysis | GameBench</title>
+  <meta name="description" content="Free refresh rate vs FPS calculator. Understand display sync, screen tearing, input lag, and effective frame rates for your monitor and GPU setup.">
+  <meta name="keywords" content="refresh rate calculator, FPS vs refresh rate, V-Sync calculator, screen tear, input lag, display sync">
+  <link rel="canonical" href="https://game.wiseclick.site/refresh-rate-calculator/">
+  <meta property="og:title" content="Refresh Rate vs FPS Calculator - Display Sync Analysis | GameBench">
+  <meta property="og:description" content="Understand the relationship between refresh rate and frame rate with V-Sync analysis.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Refresh Rate vs FPS Calculator",
+    "description": "Understand display sync, screen tearing, and effective FPS",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I enable V-Sync for gaming?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the game type. For single-player games where visual quality matters, V-Sync can eliminate screen tearing. For competitive multiplayer games, V-Sync adds input lag and should generally be off. Adaptive V-Sync is a good middle ground."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my FPS exceed my refresh rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, your GPU can produce more frames than your monitor can display. However, with V-Sync off, you may see screen tearing. With V-Sync on, your effective FPS is capped at the refresh rate. G-Sync and FreeSync monitors solve this by dynamically matching the refresh rate to your FPS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between G-Sync and V-Sync?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "V-Sync is a software feature that caps FPS at the refresh rate, which can cause input lag. G-Sync (NVIDIA) and FreeSync (AMD) are hardware features that dynamically adjust the monitor's refresh rate to match the GPU's FPS, eliminating tearing without adding input lag."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://game.wiseclick.site/" },
+      { "@type": "ListItem", "position": 2, "name": "Refresh Rate vs FPS Calculator", "item": "https://game.wiseclick.site/refresh-rate-calculator/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        GameBench
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb">
+      <a href="/">Home</a> / <span>Refresh Rate vs FPS Calculator</span>
+    </nav>
+
+    <div class="calc-page">
+      <h1>Refresh Rate vs FPS Calculator</h1>
+      <p class="subtitle">Understand how your monitor's refresh rate interacts with your GPU's frame rate.</p>
+
+      <div class="calc-tool">
+        <form class="calc-form" id="rr-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="monitor-rr">Monitor Refresh Rate</label>
+            <select id="monitor-rr">
+              <option value="60">60 Hz</option>
+              <option value="75">75 Hz</option>
+              <option value="120">120 Hz</option>
+              <option value="144" selected>144 Hz</option>
+              <option value="165">165 Hz</option>
+              <option value="240">240 Hz</option>
+              <option value="360">360 Hz</option>
+              <option value="500">500 Hz</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gpu-fps">GPU FPS Output</label>
+            <input type="number" id="gpu-fps" value="120" min="1" step="1">
+          </div>
+          <div class="form-group">
+            <label for="vsync-mode">V-Sync</label>
+            <select id="vsync-mode">
+              <option value="off" selected>Off</option>
+              <option value="on">On</option>
+              <option value="adaptive">Adaptive</option>
+            </select>
+          </div>
+          <button type="button" class="btn-calculate" onclick="calculateRefresh()">Analyze</button>
+        </form>
+
+        <div class="calc-results" id="results">
+          <div class="result-highlight">
+            <div class="label">Effective FPS</div>
+            <div class="value" id="effective-fps">0</div>
+          </div>
+          <div class="result-details">
+            <div class="result-item">
+              <div class="label">Frame Time</div>
+              <div class="value" id="frame-time">0 ms</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Screen Tearing</div>
+              <div class="value" id="screen-tear">-</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Estimated Input Lag</div>
+              <div class="value" id="input-lag">0 ms</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Recommendation</div>
+              <div class="value" id="recommendation">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="cta-section">
+          <div class="cta-card">
+            <div class="cta-icon">🎮</div>
+            <h3>Optimize Your Gaming Experience</h3>
+            <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+            <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+            <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="seo-content">
+        <div class="seo-block">
+          <h2>Refresh Rate vs FPS: What's the Difference?</h2>
+          <p><strong>Refresh rate</strong> (Hz) is how many times per second your monitor updates the image. <strong>FPS</strong> (frames per second) is how many frames your GPU produces per second. These are independent values, but they interact in important ways.</p>
+          <p>If your GPU produces 200 FPS but your monitor is 144 Hz, you'll only see up to 144 distinct frames per second. The extra GPU frames are either discarded (V-Sync on) or cause visual artifacts (V-Sync off).</p>
+        </div>
+        <div class="seo-block">
+          <h2>V-Sync Modes Explained</h2>
+          <ul>
+            <li><strong>V-Sync Off</strong> — No frame cap. You may see screen tearing if FPS exceeds refresh rate, but input lag is minimal (1-2ms). Best for competitive gaming.</li>
+            <li><strong>V-Sync On</strong> — FPS is capped at the refresh rate. Eliminates tearing but adds input lag (half a refresh cycle). Best for visual quality in single-player games.</li>
+            <li><strong>Adaptive V-Sync</strong> — Caps FPS at refresh rate when FPS is high, disables when FPS drops below. A good compromise between visual quality and responsiveness.</li>
+          </ul>
+        </div>
+        <div class="seo-block full-width">
+          <h2>Frequently Asked Questions</h2>
+          <h3>Should I enable V-Sync for gaming?</h3>
+          <p>It depends on the game type. For single-player games where visual quality matters, V-Sync can eliminate screen tearing. For competitive multiplayer games, V-Sync adds input lag and should generally be off. Adaptive V-Sync is a good middle ground.</p>
+          <h3>Can my FPS exceed my refresh rate?</h3>
+          <p>Yes, your GPU can produce more frames than your monitor can display. However, with V-Sync off, you may see screen tearing. With V-Sync on, your effective FPS is capped at the refresh rate. G-Sync and FreeSync monitors solve this by dynamically matching the refresh rate to your FPS.</p>
+          <h3>What is the difference between G-Sync and V-Sync?</h3>
+          <p>V-Sync is a software feature that caps FPS at the refresh rate, which can cause input lag. G-Sync (NVIDIA) and FreeSync (AMD) are hardware features that dynamically adjust the monitor's refresh rate to match the GPU's FPS, eliminating tearing without adding input lag.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block full-width" style="background:var(--bg-secondary);border-style:dashed;margin-top:1rem">
+      <h2>Disclaimer</h2>
+      <p>This refresh rate calculator is for <strong>educational and estimation purposes only</strong>. Actual input lag, screen tearing, and effective FPS depend on your specific hardware, drivers, and game engine. Results are theoretical estimates, not measured values.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+      </ul>
+      <div class="cross-site-links"><span>More WiseClick Tools:</span><a href="https://calc.wiseclick.site/" target="_blank" rel="noopener">Finance</a><a href="https://insure.wiseclick.site/" target="_blank" rel="noopener">Insurance</a><a href="https://fit.wiseclick.site/" target="_blank" rel="noopener">Health</a></div>
+      <p class="footer-copy">&copy; 2026 GameBench by WiseClick. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  function calculateRefresh() {
+    const refreshRate = parseFloat(document.getElementById('monitor-rr').value);
+    const fps = parseFloat(document.getElementById('gpu-fps').value) || 0;
+    const vsync = document.getElementById('vsync-mode').value;
+
+    if (fps <= 0) {
+      document.getElementById('results').classList.remove('visible');
+      return;
+    }
+
+    let effectiveFPS;
+    let inputLag;
+    let tearing;
+    let recommendation;
+
+    const refreshMs = 1000 / refreshRate;
+
+    if (vsync === 'on') {
+      effectiveFPS = Math.min(refreshRate, fps);
+      inputLag = refreshMs / 2;
+      tearing = 'No';
+    } else if (vsync === 'adaptive') {
+      effectiveFPS = fps <= refreshRate ? fps : refreshRate;
+      inputLag = refreshMs / 4;
+      tearing = fps > refreshRate ? 'Possible (above refresh)' : 'No';
+    } else {
+      effectiveFPS = fps;
+      inputLag = 1.5; // 1-2ms average
+      tearing = (fps !== refreshRate) ? 'Yes' : 'No';
+    }
+
+    const frameTime = 1000 / fps;
+
+    if (fps === refreshRate) {
+      recommendation = 'FPS matches refresh rate perfectly. Smooth experience.';
+    } else if (fps > refreshRate) {
+      recommendation = 'Consider enabling V-Sync or using G-Sync/FreeSync to prevent tearing.';
+    } else {
+      recommendation = 'GPU is the limiting factor. Consider lowering settings or upgrading GPU.';
+    }
+
+    document.getElementById('effective-fps').textContent = Math.round(effectiveFPS) + ' FPS';
+    document.getElementById('frame-time').textContent = frameTime.toFixed(2) + ' ms';
+    document.getElementById('screen-tear').textContent = tearing;
+    document.getElementById('input-lag').textContent = inputLag.toFixed(1) + ' ms';
+    document.getElementById('recommendation').textContent = recommendation;
+    document.getElementById('results').classList.add('visible');
+  }
+
+  calculateRefresh();
+  </script>
+</body>
+</html>
