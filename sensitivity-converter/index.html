@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensitivity Converter - Convert Mouse Sens Between Games | GameBench</title>
+  <meta name="description" content="Free sensitivity converter to convert your mouse sensitivity between games. Supports Valorant, CS2, Apex Legends, Fortnite, Overwatch 2, and more.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gamebench.tools/"},
+      {"@type": "ListItem", "position": 2, "name": "Sensitivity Converter", "item": "https://gamebench.tools/sensitivity-converter/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does sensitivity conversion work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sensitivity conversion works by calculating your cm/360 (centimeters per 360-degree turn) in the source game using its yaw value, then reversing the calculation for the target game using its yaw value. This preserves the same physical mouse movement distance for a full turn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my sensitivity feel different after converting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Different games have different FOV (field of view) values, crosshair sizes, movement speeds, and zoom levels. While the cm/360 will match, the visual feel may differ due to these factors. It is recommended to fine-tune your converted sensitivity slightly after switching games."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert sensitivity when changing DPI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, this converter supports different DPI values for source and target. If you are changing both your game and your mouse DPI, enter both values and the calculator will adjust the in-game sensitivity to maintain the same feel."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      GameBench
+    </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/bottleneck-calculator/">Bottleneck</a></li>
+        <li><a href="/fps-calculator/">FPS</a></li>
+        <li><a href="/edpi-calculator/">eDPI</a></li>
+        <li><a href="/sensitivity-converter/" class="active">Sensitivity</a></li>
+        <li><a href="/dpi-analyzer/">DPI</a></li>
+        <li><a href="/pc-build-calculator/">PC Build</a></li>
+        <li><a href="/ping-calculator/">Ping</a></li>
+        <li><a href="/refresh-rate-calculator/">Refresh Rate</a></li>
+        <li><a href="/fov-calculator/">FOV</a></li>
+        <li><a href="/monitor-distance-calculator/">Monitor</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <nav class="breadcrumb">
+    <a href="/">Home</a> &rsaquo; <span>Sensitivity Converter</span>
+  </nav>
+
+  <div class="calc-page">
+    <h1>Sensitivity Converter</h1>
+    <p class="subtitle">Convert your mouse sensitivity between different games while keeping the same feel.</p>
+
+    <div class="calc-tool">
+      <div class="calc-form" id="converterForm">
+        <div class="form-group">
+          <label for="fromGame">From Game</label>
+          <select id="fromGame">
+            <option value="valorant" selected>Valorant</option>
+            <option value="cs2">CS2</option>
+            <option value="apex">Apex Legends</option>
+            <option value="fortnite">Fortnite</option>
+            <option value="ow2">Overwatch 2</option>
+            <option value="r6">Rainbow Six Siege</option>
+            <option value="cod">Call of Duty</option>
+            <option value="minecraft">Minecraft</option>
+            <option value="rust">Rust</option>
+            <option value="destiny2">Destiny 2</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fromSens">From Sensitivity</label>
+          <input type="number" id="fromSens" value="0.35" min="0.001" max="100" step="0.01">
+        </div>
+        <div class="form-group">
+          <label for="fromDpi">From DPI</label>
+          <input type="number" id="fromDpi" value="800" min="100" max="32000" step="50">
+        </div>
+        <div class="form-group">
+          <label for="toGame">To Game</label>
+          <select id="toGame">
+            <option value="valorant">Valorant</option>
+            <option value="cs2" selected>CS2</option>
+            <option value="apex">Apex Legends</option>
+            <option value="fortnite">Fortnite</option>
+            <option value="ow2">Overwatch 2</option>
+            <option value="r6">Rainbow Six Siege</option>
+            <option value="cod">Call of Duty</option>
+            <option value="minecraft">Minecraft</option>
+            <option value="rust">Rust</option>
+            <option value="destiny2">Destiny 2</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="toDpi">To DPI</label>
+          <input type="number" id="toDpi" value="800" min="100" max="32000" step="50">
+        </div>
+        <button class="btn-calculate" onclick="convertSensitivity()">Convert Sensitivity</button>
+      </div>
+
+      <div class="calc-results" id="results">
+        <div class="result-highlight">
+          <div class="label">New Sensitivity</div>
+          <div class="value" id="newSens">-</div>
+        </div>
+        <div class="result-details">
+          <div class="result-item">
+            <div class="label">From eDPI</div>
+            <div class="value" id="fromEdpi">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">To eDPI</div>
+            <div class="value" id="toEdpi">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">cm/360 (Both Games)</div>
+            <div class="value" id="cm360">-</div>
+          </div>
+          <div class="result-item">
+            <div class="label">in/360</div>
+            <div class="value" id="in360">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-card">
+        <div class="cta-icon">&#127918;</div>
+        <h3>Optimize Your Gaming Experience</h3>
+        <p>Reduce lag, boost FPS, and improve your setup with top gaming optimization tools.</p>
+        <p class="affiliate-disclosure">We may earn a referral fee if you purchase through our links. This does not affect our calculator results.</p>
+        <a href="#AFFILIATE_LINK_PLACEHOLDER" class="cta-button" target="_blank" rel="noopener sponsored">Explore Gaming Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <div class="seo-block">
+      <h2>How Sensitivity Conversion Works</h2>
+      <p>Different games use different sensitivity scales. What feels like a fast sensitivity in Valorant might be slow in CS2. Our converter bridges this gap by using a universal metric: cm/360.</p>
+      <h3>The Process</h3>
+      <ul>
+        <li><strong>Step 1:</strong> Calculate your cm/360 in the source game using its yaw value</li>
+        <li><strong>Step 2:</strong> Reverse the calculation for the target game using its yaw value</li>
+        <li><strong>Step 3:</strong> Output the new in-game sensitivity that matches your cm/360</li>
+      </ul>
+      <p>The yaw value (m_yaw) is a hidden parameter each game uses to convert mouse input into degrees of rotation. By working through cm/360, we bypass the differences in each game's scale.</p>
+    </div>
+    <div class="seo-block">
+      <h2>Tips for Switching Games</h2>
+      <p>While converting sensitivity gives you the same cm/360, the feel may still differ due to other game-specific factors.</p>
+      <h3>What Affects Sensitivity Feel</h3>
+      <ul>
+        <li><strong>Field of View (FOV):</strong> A wider FOV makes the same sensitivity feel slower visually</li>
+        <li><strong>Movement speed:</strong> Faster player movement makes aiming feel different</li>
+        <li><strong>Crosshair style:</strong> Size and color affect perceived precision</li>
+        <li><strong>Zoom/scope:</strong> Scoped sensitivity is usually separate and needs its own tuning</li>
+        <li><strong>Mouse acceleration:</strong> Ensure it is disabled in both games and your OS</li>
+      </ul>
+      <h3>Recommended Approach</h3>
+      <ul>
+        <li>Convert your sensitivity using this tool as a starting point</li>
+        <li>Play for 15-30 minutes to adapt</li>
+        <li>Fine-tune by adjusting plus or minus 5-10% if needed</li>
+        <li>Stick with your final value for at least a few days before changing again</li>
+      </ul>
+    </div>
+    <div class="seo-block full-width">
+      <h2>Frequently Asked Questions</h2>
+      <h3>How does sensitivity conversion work?</h3>
+      <p>Sensitivity conversion works by calculating your cm/360 (centimeters per 360-degree turn) in the source game using its yaw value, then reversing the calculation for the target game using its yaw value. This preserves the same physical mouse movement distance for a full turn.</p>
+      <h3>Why does my sensitivity feel different after converting?</h3>
+      <p>Different games have different FOV (field of view) values, crosshair sizes, movement speeds, and zoom levels. While the cm/360 will match, the visual feel may differ due to these factors. It is recommended to fine-tune your converted sensitivity slightly after switching games.</p>
+      <h3>Can I convert sensitivity when changing DPI?</h3>
+      <p>Yes, this converter supports different DPI values for source and target. If you are changing both your game and your mouse DPI, enter both values and the calculator will adjust the in-game sensitivity to maintain the same feel.</p>
+    </div>
+  </div>
+
+  <div class="seo-block full-width" style="margin-top:1.5rem;">
+    <p style="font-size:0.8rem;color:var(--text-light);line-height:1.6;"><strong>Disclaimer:</strong> This sensitivity converter uses approximate yaw values for each game. Actual sensitivity may differ slightly due to game updates, FOV settings, zoom sensitivity multipliers, and other in-game settings. Use converted values as a starting point and fine-tune in-game as needed.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="cross-site-links">
+      <span>Our Sites:</span>
+      <a href="https://gamebench.tools/">GameBench</a>
+      <a href="https://fitcalc.health/">FitCalc</a>
+      <a href="https://insurewise.tools/">InsureWise</a>
+      <a href="https://financecalc.tools/">FinanceCalc</a>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2025 GameBench. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const gameYaw = {
+  'valorant': 0.07, 'cs2': 0.022, 'apex': 0.022, 'fortnite': 0.022,
+  'ow2': 0.0066, 'r6': 1.1, 'cod': 0.022, 'minecraft': 0.15,
+  'rust': 0.1, 'destiny2': 0.033
+};
+
+function convertSensitivity() {
+  const fromGame = document.getElementById('fromGame').value;
+  const fromSens = parseFloat(document.getElementById('fromSens').value) || 1;
+  const fromDpi = parseFloat(document.getElementById('fromDpi').value) || 800;
+  const toGame = document.getElementById('toGame').value;
+  const toDpi = parseFloat(document.getElementById('toDpi').value) || 800;
+
+  const fromYaw = gameYaw[fromGame] || 0.022;
+  const toYaw = gameYaw[toGame] || 0.022;
+
+  // cm/360 for source
+  const cm360 = (2.54 * 360) / (fromDpi * fromSens * fromYaw);
+  const in360 = cm360 / 2.54;
+
+  // Target sensitivity
+  const toSens = (2.54 * 360) / (toDpi * cm360 * toYaw);
+
+  const fromEdpi = fromDpi * fromSens;
+  const toEdpi = toDpi * toSens;
+
+  document.getElementById('newSens').textContent = toSens.toFixed(4);
+  document.getElementById('fromEdpi').textContent = Math.round(fromEdpi * 100) / 100;
+  document.getElementById('toEdpi').textContent = Math.round(toEdpi * 100) / 100;
+  document.getElementById('cm360').textContent = cm360.toFixed(2) + ' cm';
+  document.getElementById('in360').textContent = in360.toFixed(2) + ' in';
+  document.getElementById('results').classList.add('visible');
+}
+
+convertSensitivity();
+</script>
+</body>
+</html>
